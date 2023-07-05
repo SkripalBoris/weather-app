@@ -16,13 +16,13 @@ export default function App() {
     const daily = localStorage.getItem('daily');
 
     try {
-      const forecastData = JSON.parse(forecast);
+      const forecastData = JSON.parse(forecast as string);
       if (forecastData) setForecast(forecastData);
 
-      const dailyData = JSON.parse(daily);
+      const dailyData = JSON.parse(daily as string);
       if (dailyData) setDaily(dailyData);
-    } finally {
-    }
+      // TODO fix it
+    } finally { /* empty */ }
   }
 
   useEffect(() => {
@@ -39,6 +39,8 @@ export default function App() {
   useEffect(() => {
     async function getWeather() {
       const apiKey = '';
+      // TODO: fix this
+      const locationKey = '';
       const apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`;
 
       const response = await fetch(apiUrl);

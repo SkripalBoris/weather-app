@@ -5,7 +5,6 @@
   html {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  
     font-size: 10px;
   }
   
@@ -19,7 +18,6 @@
     min-height: 100vh;
     justify-content: center;
     align-items: center;
-  
     background: linear-gradient(to bottom, #011e33, #625a72);
     color: white;
   }
@@ -52,13 +50,13 @@
   
   .forecast {
     border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    padding: 15px 15px;
+    background-color: rgb(255 255 255 / 3%);
+    border: 1px solid rgb(255 255 255 / 3%);
+    padding: 15px;
   }
   
   .forecast-title {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 1px solid rgb(255 255 255 / 25%);
     font-size: 0.8em;
     letter-spacing: 0.05em;
     padding-bottom: 8px;
@@ -98,16 +96,16 @@
   }
   
   .daily {
-    margin: 10px 0 0 0;
+    margin: 10px 0 0;
     border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    padding: 15px 15px;
+    background-color: rgb(255 255 255 / 3%);
+    border: 1px solid rgb(255 255 255 / 3%);
+    padding: 15px;
   }
   
   .daily-title,
   .daily-row {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 1px solid rgb(255 255 255 / 25%);
   }
   
   .daily-title {
@@ -167,7 +165,7 @@
      temperatures of the 10-day period */
   .range {
     flex: 1;
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgb(0 0 0 / 15%);
     height: 4px;
     border-radius: 5px;
     position: relative;
@@ -181,11 +179,7 @@
     --right: 0%;
   
     position: absolute;
-    left: var(--left);
-    right: var(--right);
-    top: 0;
-    bottom: 0;
-  
+    inset: 0 var(--right) 0 var(--left);
     border-radius: 5px;
     overflow: hidden;
   }
@@ -194,12 +188,7 @@
     content: '';
     display: block;
     position: absolute;
-  
-    top: 0;
-    bottom: 0;
-    left: calc(-1 * var(--left));
-    right: calc(-1 * var(--right));
-  
+    inset: 0 calc(-1 * var(--right)) 0 calc(-1 * var(--left));
     background: linear-gradient(to right, #96d0a7, #ef8734);
     background-size: 80px 100%;
     background-position: center;
