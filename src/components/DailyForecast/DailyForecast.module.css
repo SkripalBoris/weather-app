@@ -1,0 +1,100 @@
+.daily {
+    margin: 10px 0 0;
+    border-radius: 15px;
+    background-color: rgb(255 255 255 / 3%);
+    border: 1px solid rgb(255 255 255 / 3%);
+    padding: 15px;
+}
+  
+.dailyTitle,
+.dailyRow {
+    border-bottom: 1px solid rgb(255 255 255 / 25%);
+}
+  
+.dailyTitle {
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    padding-bottom: 8px;
+    font-weight: 400;
+}
+  
+.dailyRow {
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+}
+  
+.dailyRow:last-child {
+    border-bottom: 0;
+}
+  
+.dailyRange {
+    width: 155px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+  
+.dailyMin,
+.dailyMax {
+    width: 30px;
+    text-align: center;
+}
+  
+.dailyMin {
+    opacity: 0.5;
+}
+  
+.dailyConditions {
+    text-align: center;
+    line-height: 1;
+}
+  
+.dailyConditions svg {
+    max-width: 20px;
+}
+  
+.probability {
+    display: block;
+    font-size: 12px;
+    line-height: 0.8;
+    margin: -5px 0 5px;
+    color: #81cffa;
+}
+  
+/* Shows the range of lowest and highest 
+     temperatures of the 10-day period */
+.range {
+    flex: 1;
+    background-color: rgb(0 0 0 / 15%);
+    height: 4px;
+    border-radius: 5px;
+    position: relative;
+}
+  
+/* Shows the range of lowest and highest 
+     temperatures of each day in comparison 
+     to the range of the whole period */
+.rangeMeter {
+    --left: 10%;
+    --right: 0%;
+  
+    position: absolute;
+    inset: 0 var(--right) 0 var(--left);
+    border-radius: 5px;
+    overflow: hidden;
+}
+  
+.rangeMeter::after {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0 calc(-1 * var(--right)) 0 calc(-1 * var(--left));
+    background: linear-gradient(to right, #96d0a7, #ef8734);
+    background-size: 80px 100%;
+    background-position: center;
+    border-radius: 5px;
+}
+  

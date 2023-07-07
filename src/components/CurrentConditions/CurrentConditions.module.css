@@ -1,0 +1,19 @@
+.header {
+    font-weight: 400;
+    text-align: center;
+    margin: 50px 0 40px;
+  }
+
+  .location {
+    font-size: 3.7rem;
+  }
+
+  .temp {
+    font-size: 102px;
+    line-height: 102px;
+    font-weight: 100;
+  }
+
+  .conditions {
+    font-size: 24px;
+  }

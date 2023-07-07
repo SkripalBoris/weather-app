@@ -1,0 +1,42 @@
+.forecast {
+    border-radius: 15px;
+    background-color: rgb(255 255 255 / 3%);
+    border: 1px solid rgb(255 255 255 / 3%);
+    padding: 15px;
+}
+  
+.title {
+    border-bottom: 1px solid rgb(255 255 255 / 25%);
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+    padding-bottom: 8px;
+    font-weight: 400;
+}
+
+.forecastList {
+    display: flex;
+}
+  
+.forecastItem {
+    width: 45px;
+    min-width: 45px;
+    text-align: center;
+    margin: 0 10px;
+    padding: 10px 0 0;
+}
+  
+.forecastItem:first-child {
+    margin-left: 0;
+}
+  
+.forecastItem:last-child {
+    margin-right: 0;
+}
+  
+.forecastItem span {
+    display: block;
+}
+  
+.forecastItem span + span {
+    margin: 15px 0 0;
+}
