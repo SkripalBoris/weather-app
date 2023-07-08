@@ -12,7 +12,7 @@ export async function fetchWeatherData(): Promise<WeatherData> {
 
     // const apiKey = '';
     // const locationKey = '';
-    // const apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`;
+    // const apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=jCLPUDFqHDZV7369qCF3gfHGutmpcVKG`;
 
     // const response = await fetch(apiUrl);
     // const data = await response.json();

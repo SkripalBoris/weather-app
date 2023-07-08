@@ -1,0 +1,1 @@
+export const ACCU_WEATHER_API_KEY = 'jCLPUDFqHDZV7369qCF3gfHGutmpcVKG'
