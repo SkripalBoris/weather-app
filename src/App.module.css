@@ -10,7 +10,7 @@
     }
 
     &[data-period="day"] {
-        background: linear-gradient(to bottom, #4982AD, rgba(144, 187, 216, 0.5));
+        background: linear-gradient(to bottom, #4982AD, rgb(144 187 216 / 50%));
     }
 
     &[data-period="evening"] {

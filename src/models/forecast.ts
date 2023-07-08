@@ -6,21 +6,20 @@ export type TemperatureRange = {
 }
 
 export type CurrentForecastData = {
-    temp: number,
-    cond: WeatherConditions,
-    range: TemperatureRange
+    temperature: number,
+    temperatureRange: TemperatureRange,
+    condition: WeatherConditions
 }
 
 export type HourlyForecastData = {
-    datetime: string,
-    temperature: string,
-    conditions: WeatherConditions
+    datetime: Date,
+    temperature: number,
+    conditions: WeatherConditions,
 }
 
 export type DailyForecastData = {
-    datetime: string, // TODO add types
+    datetime: Date,
     conditions: WeatherConditions,
-    temp: number,
-    range: TemperatureRange,
-    periodRange: TemperatureRange
+    temperatureRange: TemperatureRange,
+    precipitationProbability?: number
 }

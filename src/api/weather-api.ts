@@ -1,41 +1,98 @@
-import { CurrentForecastData, DailyForecastData, HourlyForecastData } from '../models/forecast';
-import { currentWeather, dailyForecast, hourly } from './data';
+import axios from 'axios';
+import { DailyForecastData, HourlyForecastData } from '../models/forecast';
+import { ACCU_WEATHER_API_KEY } from './constants';
+import { WeatherConditions } from '../models/weather-conditions';
 
-type WeatherData = {
-    current: CurrentForecastData,
-    hourly: HourlyForecastData[],
-    daily: DailyForecastData[],
+type AccuWeather1HourData = {
+    // current weather conditions
+    IconPhrase: string,
+    Temperature: {
+        Value: number
+    },
+    DateTime: string,
 }
 
-export async function fetchWeatherData(): Promise<WeatherData> {
-    // TODO: fix this
+const HOURLY_FORECAST_API_BASE_URL = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/'
 
-    // const apiKey = '';
-    // const locationKey = '';
-    // const apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=jCLPUDFqHDZV7369qCF3gfHGutmpcVKG`;
+export async function fetchHourlyForecast(locationKey: string): Promise<HourlyForecastData[]> {
+    const data = await axios.get<AccuWeather1HourData[]>(`${HOURLY_FORECAST_API_BASE_URL}/${locationKey}`, {params: {
+        'apikey': ACCU_WEATHER_API_KEY,
+        'metric': true
+    }})
 
-    // const response = await fetch(apiUrl);
-    // const data = await response.json();
+    return data.data.map(({IconPhrase, Temperature, DateTime}) => ({
+        datetime: new Date(DateTime),
+        temperature: Math.round(Temperature.Value),
+        conditions: prepareCondition(IconPhrase),
+    }))
+}
 
-
-//   if (!forecast.length || !daily.length) {
-//     const forecast = localStorage.getItem('forecast');
-//     const daily = localStorage.getItem('daily');
-
-//     try {
-//       const forecastData = JSON.parse(forecast as string);
-//       if (forecastData) setForecast(forecastData);
-
-//       const dailyData = JSON.parse(daily as string);
-//       if (dailyData) setDaily(dailyData);
-//       // TODO fix it
-//     } finally { /* empty */ }
-//   }
-
-    // TODO: return mocked data. fix types when real fetching data will be implemented
-    return {
-        current: currentWeather as unknown as CurrentForecastData,
-        hourly: hourly as unknown as HourlyForecastData[],
-        daily: dailyForecast as unknown as DailyForecastData[]
+type AccuWeatherDayData = {DailyForecasts: [{
+    Temperature: {
+        Minimum: {
+            Value: number
+        },
+        Maximum: {
+            Value: number
+        }
+    },
+    // current weather conditions
+    Day: {
+        IconPhrase: string,
+        PrecipitationProbability: number
     }
+    Date: string
+}]}
+
+const DAILY_FORECAST_API_BASE_URL = 'http://dataservice.accuweather.com/forecasts/v1/daily/5day/'
+
+export async function fetchDailyForecast(locationKey: string): Promise<DailyForecastData[]> {
+    const data = await axios.get<AccuWeatherDayData>(`${DAILY_FORECAST_API_BASE_URL}/${locationKey}`, {params: {
+        'apikey': ACCU_WEATHER_API_KEY,
+        'metric': true,
+        'details': true
+    }})
+
+    return data.data.DailyForecasts.map(({Day, Temperature, Date: date}) => ({
+        datetime: new Date(date),
+        temperatureRange: {
+            max: Math.round(Temperature.Maximum.Value),
+            min: Math.round(Temperature.Minimum.Value)
+        },
+        conditions: prepareCondition(Day.IconPhrase),
+        precipitationProbability: Day.PrecipitationProbability || undefined, // to avoid empty values
+    }))
+}
+
+/*
+    Prepare condition's name because AccuWeather support a lot of different weather conditions but app shows only 6 conditions
+*/
+function prepareCondition(conditionName: string): WeatherConditions {
+    const preparedName = conditionName.toLowerCase();
+
+    if (preparedName.includes('thunder')) {
+        return WeatherConditions.THUNDER
+    }
+
+    if (preparedName.includes('partly cloudy')) {
+        return WeatherConditions.PARTLY_CLOUDY
+    }
+
+    if (preparedName.includes('cloudy')) {
+        return WeatherConditions.CLOUDY
+    }
+
+    if (preparedName.includes('light rain')) {
+        return WeatherConditions.LIGHT_RAIN
+    }
+
+    if (preparedName.includes('heavy rain')) {
+        return WeatherConditions.HEAVY_RAIN
+    }
+
+    if (preparedName.includes('rain')) {
+        return WeatherConditions.RAIN
+    }
+
+    return WeatherConditions.SUNNY
 }

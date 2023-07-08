@@ -10,23 +10,25 @@ type DailyForecast = {
 }
 
 export const DailyForecast: FC<DailyForecast> = ({ forecast, currentTemp }) => {
+  const lowest = Math.min(...forecast.map(data => data.temperatureRange.min))
+  const highest = Math.max(...forecast.map(data => data.temperatureRange.max))
+
   return <div className={s.daily}>
     <div className={s.dailyTitle}>10-DAY FORECAST</div>
     <div className={s.forecast}>
       {forecast.map(
         ({
           datetime,
-          temp,
-          range: { min, max },
-          periodRange: { min: lowest, max: highest },
+          temperatureRange: { min, max },
+          precipitationProbability
         }, index) => (
           <>
-            <div className={s.datetimeContainer}>{datetime}</div>
+            <div className={s.datetimeContainer}>{index === 0 ? 'Today' : datetime.toLocaleDateString('en-GB',{weekday: 'short'})}</div>
 
             <div className={s.conditionsContainer}>
               <div className={s.dailyConditions}>
                 <Rain />
-                <span className={s.probability}>60%</span>
+                {Boolean(precipitationProbability) && <span className={s.probability}>{precipitationProbability}%</span>}
               </div>
             </div>
             <div className={s.dailyRangeContainer}>

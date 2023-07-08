@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react'
 import { LocationData } from '../models/location';
-import { fetchLocationInfo } from '../api/location-api';
-
-const LOCATIONS_INFO_CACHE_KEY = 'locationsInfoCache'
+import { getLocationInfo } from '../services/location-service';
 
 export function useCurrentLocationData(): LocationData | undefined {
     const [locationData, setLocationData] = useState<LocationData>();
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition((pos) => {
+        navigator.geolocation.getCurrentPosition(async (pos) => {
           const { latitude: lat, longitude: lon } = pos.coords;
 
-          getCurrentLocationData(lat, lon).then(data => setLocationData(data))
+          const locationData = await getLocationInfo(lat, lon)
+          setLocationData({...locationData, lat, lon})
         }, () => {
           setLocationData(
             {
@@ -25,22 +24,4 @@ export function useCurrentLocationData(): LocationData | undefined {
       }, []);
 
     return locationData
-}
-
-async function getCurrentLocationData(lat: number, lon: number): Promise<LocationData> {
-  const locationFromCache = localStorage.getItem(LOCATIONS_INFO_CACHE_KEY)
-
-  if (locationFromCache) {
-    const parsedLocation: LocationData = JSON.parse(locationFromCache)
-
-    if (parsedLocation.lat === lat && parsedLocation.lon === lon) {
-      return parsedLocation
-    }
-  }
-
-  //TODO: add catch
-  const locationData = await fetchLocationInfo(lat, lon)
-  const result = {...locationData, lat, lon}
-  localStorage.setItem(LOCATIONS_INFO_CACHE_KEY, JSON.stringify(result))
-  return result
 }
