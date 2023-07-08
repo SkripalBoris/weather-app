@@ -15,7 +15,15 @@
 
 .forecastList {
     display: flex;
+    overflow-y: hidden;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
+
+.forecastList::-webkit-scrollbar {
+    display: none;
+  }
   
 .forecastItem {
     width: 45px;

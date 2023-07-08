@@ -38,6 +38,16 @@ export const currentWeather = {
       temperature: '18°',
       conditions: 6,
     },
+    {
+      datetime: '13 PM',
+      temperature: '18°',
+      conditions: 6,
+    },
+    {
+      datetime: '13 PM',
+      temperature: '18°',
+      conditions: 6,
+    },
   ];
   
   export const dailyForecast = [
