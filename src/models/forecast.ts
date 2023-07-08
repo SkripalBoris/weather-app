@@ -6,7 +6,7 @@ export type TemperatureRange = {
 }
 
 export type CurrentForecastData = {
-    temp: string,
+    temp: number,
     cond: WeatherConditions,
     range: TemperatureRange
 }

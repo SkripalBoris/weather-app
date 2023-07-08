@@ -4,7 +4,7 @@ export const currentWeather = {
       lon: 17,
       name: 'Stockholm',
     },
-    temp: '21°',
+    temp: 21,
     cond: 1,
     range: {
       min: '15°',

@@ -6,9 +6,35 @@
     padding: 15px;
 }
   
-.dailyTitle,
-.dailyRow {
+.forecast {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    font-size: 2rem;
+}
+
+.datetimeContainer,
+.conditionsContainer,
+.dailyRangeContainer {
+    padding: 6px;
+    height: 55px;
+    align-self: center;
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid rgb(255 255 255 / 25%);
+    box-sizing: border-box;
+
+    &:nth-last-child(-n+3) { 
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+}
+
+.datetimeContainer {
+    padding-left: 0;
+}
+
+.dailyRangeContainer {
+    padding-right: 0;
 }
   
 .dailyTitle {
@@ -16,35 +42,7 @@
     letter-spacing: 0.05em;
     padding-bottom: 8px;
     font-weight: 400;
-}
-  
-.dailyRow {
-    padding: 5px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 2rem;
-}
-  
-.dailyRow:last-child {
-    border-bottom: 0;
-}
-  
-.dailyRange {
-    width: 155px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-  
-.dailyMin,
-.dailyMax {
-    width: 30px;
-    text-align: center;
-}
-  
-.dailyMin {
-    opacity: 0.5;
+    border-bottom: 1px solid rgb(255 255 255 / 25%);
 }
   
 .dailyConditions {
@@ -62,39 +60,5 @@
     line-height: 0.8;
     margin: -5px 0 5px;
     color: #81cffa;
-}
-  
-/* Shows the range of lowest and highest 
-     temperatures of the 10-day period */
-.range {
-    flex: 1;
-    background-color: rgb(0 0 0 / 15%);
-    height: 4px;
-    border-radius: 5px;
-    position: relative;
-}
-  
-/* Shows the range of lowest and highest 
-     temperatures of each day in comparison 
-     to the range of the whole period */
-.rangeMeter {
-    --left: 10%;
-    --right: 0%;
-  
-    position: absolute;
-    inset: 0 var(--right) 0 var(--left);
-    border-radius: 5px;
-    overflow: hidden;
-}
-  
-.rangeMeter::after {
-    content: '';
-    display: block;
-    position: absolute;
-    inset: 0 calc(-1 * var(--right)) 0 calc(-1 * var(--left));
-    background: linear-gradient(to right, #96d0a7, #ef8734);
-    background-size: 80px 100%;
-    background-position: center;
-    border-radius: 5px;
 }
   

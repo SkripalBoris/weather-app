@@ -34,7 +34,7 @@ export default function App() {
     <div>
       <CurrentConditions forecast={current} locationData={currentLocation}/>
       <HourlyForecast forecast={hourly} />
-      <DailyForecast forecast={daily} />
+      <DailyForecast forecast={daily} currentTemp={current.temp} />
     </div>
   );
 }

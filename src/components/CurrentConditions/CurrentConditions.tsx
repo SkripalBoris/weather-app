@@ -18,7 +18,7 @@ export const CurrentConditions: FC<CurrentConditionsProps> = ({
 
     return <div className={s.header}>
         <div className={s.location}>{locationData.name}</div>
-        <div className={s.temp}>{forecast.temp}</div>
+        <div className={s.temp}>{forecast.temp}°</div>
         <div className={s.conditions}>
             {weatherName}
             <br />

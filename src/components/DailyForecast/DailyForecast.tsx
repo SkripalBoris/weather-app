@@ -1,39 +1,38 @@
 import React, { FC } from 'react'
 import { DailyForecastData } from '../../models/forecast'
 import { Rain } from '../../weather/Rain'
+import { DailyRange } from './DailyRange/DailyRange'
 import s from './DailyForecast.module.css'
 
 type DailyForecast = {
-    forecast: DailyForecastData[]
+  currentTemp: number
+  forecast: DailyForecastData[]
 }
 
-export const DailyForecast: FC<DailyForecast> = ({forecast}) => {
-    return <div className={s.daily}>
+export const DailyForecast: FC<DailyForecast> = ({ forecast, currentTemp }) => {
+  return <div className={s.daily}>
     <div className={s.dailyTitle}>10-DAY FORECAST</div>
-    <div>
+    <div className={s.forecast}>
       {forecast.map(
         ({
           datetime,
           temp,
           range: { min, max },
           periodRange: { min: lowest, max: highest },
-        }) => (
-          <div key={datetime} className={s.dailyRow}>
-            <div>{datetime}</div>
+        }, index) => (
+          <>
+            <div className={s.datetimeContainer}>{datetime}</div>
 
-            <div className={s.dailyConditions}>
-              <Rain />
-              <span className={s.probability}>60%</span>
+            <div className={s.conditionsContainer}>
+              <div className={s.dailyConditions}>
+                <Rain />
+                <span className={s.probability}>60%</span>
+              </div>
             </div>
-
-            <div className={s.dailyRange}>
-              <span className={s.dailyMin}>{min}°</span>
-              <span className={s.range}>
-                <span className={s.rangeMeter} />
-              </span>
-              <span className={s.dailyMax}>{max}°</span>
+            <div className={s.dailyRangeContainer}>
+              <DailyRange min={min} max={max} lowest={lowest} highest={highest} current={index === 0 ? currentTemp : undefined} />
             </div>
-          </div>
+          </>
         )
       )}
     </div>
