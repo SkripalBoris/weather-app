@@ -1,0 +1,5 @@
+.icon {
+    &[data-size="s"] {
+        max-width: 20px;
+    }
+}

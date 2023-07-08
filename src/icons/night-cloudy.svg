@@ -1,6 +1,3 @@
-import React from 'react';
-
-export const NightCloudy = () => (
   <svg
     width="29"
     height="20"
@@ -13,4 +10,3 @@ export const NightCloudy = () => (
       fill="white"
     />
   </svg>
-);

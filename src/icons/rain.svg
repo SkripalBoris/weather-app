@@ -1,6 +1,3 @@
-import React from 'react';
-
-export const Rain = () => (
   <svg
     width="26"
     height="27"
@@ -13,4 +10,3 @@ export const Rain = () => (
       fill="white"
     />
   </svg>
-);

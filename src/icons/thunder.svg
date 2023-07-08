@@ -1,6 +1,3 @@
-import React from 'react';
-
-export const Thunder = () => (
   <svg
     width="26"
     height="28"
@@ -13,4 +10,3 @@ export const Thunder = () => (
       fill="white"
     />
   </svg>
-);

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
+import { TimePeriod, getTimePeriod } from '../utils/getTimePeriod';
 
-export type TimePeriod = 'morning' | 'day' | 'evening' | 'night'
 
 export function useCurrentTimePeriod(): TimePeriod {
-    const [timePeriod, setCurrentTimePeriod] = useState(getCurrentTimePeriod());
+    const [timePeriod, setCurrentTimePeriod] = useState(getTimePeriod(new Date()));
 
     useEffect(() => {
         const periodInterval = setInterval(() => {
-            const newPeriod = getCurrentTimePeriod();
+            const newPeriod = getTimePeriod(new Date());
 
             if (newPeriod !== timePeriod) {
                 setCurrentTimePeriod(newPeriod)
@@ -18,23 +18,4 @@ export function useCurrentTimePeriod(): TimePeriod {
     }, [timePeriod])
 
     return timePeriod;
-}
-
-function getCurrentTimePeriod(): TimePeriod {
-    const currentTime = new Date();
-    const currentHours = currentTime.getHours();
-
-    if (currentHours >= 5 && currentHours < 11) {
-        return 'morning'
-    }
-
-    if (currentHours >= 11 && currentHours < 17) {
-        return 'day'
-    }
-
-    if (currentHours >= 17 && currentHours < 21) {
-        return 'evening'
-    }
-
-    return 'night'
 }

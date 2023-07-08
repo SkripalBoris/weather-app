@@ -45,6 +45,6 @@
     display: block;
 }
   
-.forecastItem span + span {
-    margin: 15px 0 0;
+.forecastIcon {
+    margin: 15px 0
 }

@@ -1,13 +1,16 @@
 import React, { FC } from 'react'
 import { DailyForecastData } from '../../models/forecast'
-import { Rain } from '../../weather/Rain'
 import { DailyRange } from './DailyRange/DailyRange'
 import s from './DailyForecast.module.css'
+import { WeatherConditionIcon } from '../WeatherConditionIcon/WeatherConditionIcon'
+import { WeatherConditions } from '../../models/weather-conditions'
 
 type DailyForecast = {
   currentTemp: number
   forecast: DailyForecastData[]
 }
+
+const CONDITIONS_WITH_RAIN = new Set([WeatherConditions.HEAVY_RAIN, WeatherConditions.LIGHT_RAIN, WeatherConditions.THUNDER, WeatherConditions.RAIN])
 
 export const DailyForecast: FC<DailyForecast> = ({ forecast, currentTemp }) => {
   const lowest = Math.min(...forecast.map(data => data.temperatureRange.min))
@@ -19,6 +22,7 @@ export const DailyForecast: FC<DailyForecast> = ({ forecast, currentTemp }) => {
       {forecast.map(
         ({
           datetime,
+          conditions,
           temperatureRange: { min, max },
           precipitationProbability
         }, index) => (
@@ -27,8 +31,8 @@ export const DailyForecast: FC<DailyForecast> = ({ forecast, currentTemp }) => {
 
             <div className={s.conditionsContainer}>
               <div className={s.dailyConditions}>
-                <Rain />
-                {Boolean(precipitationProbability) && <span className={s.probability}>{precipitationProbability}%</span>}
+                <WeatherConditionIcon condition={conditions} size='s' />
+                {Boolean(precipitationProbability) && CONDITIONS_WITH_RAIN.has(conditions) && <span className={s.probability}>{precipitationProbability}%</span>}
               </div>
             </div>
             <div className={s.dailyRangeContainer}>

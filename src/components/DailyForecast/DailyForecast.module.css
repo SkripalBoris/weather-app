@@ -50,15 +50,10 @@
     line-height: 1;
 }
   
-.dailyConditions svg {
-    max-width: 20px;
-}
-  
 .probability {
     display: block;
     font-size: 12px;
     line-height: 0.8;
-    margin: -5px 0 5px;
     color: #81cffa;
 }
   
