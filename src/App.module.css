@@ -1,0 +1,29 @@
+.app {
+    display: grid;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    &[data-period="morning"] {
+        background: linear-gradient(to bottom, #81C5E5, #DC927F);
+    }
+
+    &[data-period="day"] {
+        background: linear-gradient(to bottom, #4982AD, rgba(144, 187, 216, 0.5));
+    }
+
+    &[data-period="evening"] {
+        background: linear-gradient(to bottom, #6F6D8C, rgb(188 97 90 / 50%));
+    }
+
+    &[data-period="night"] {
+        background: linear-gradient(to bottom, #011e33, #625a72);
+    }
+}
+
+.container {
+    min-width: 320px;
+    max-width: 460px;
+    padding: 10px;
+}

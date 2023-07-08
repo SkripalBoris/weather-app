@@ -13,19 +13,3 @@
     font-size: 1.6rem;
   }
   
-  #root {
-    display: grid;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to bottom, #011e33, #625a72);
-    color: white;
-  }
-  
-  #root > div {
-    min-width: 320px;
-    max-width: 460px;
-    padding: 10px;
-  }
-  
-  

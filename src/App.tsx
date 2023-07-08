@@ -5,7 +5,9 @@ import { useCurrentLocationData } from './hooks/useCurrentLocationData';
 import { CurrentConditions } from './components/CurrentConditions/CurrentConditions';
 import { HourlyForecast } from './components/HourlyForecast/HourlyForecast';
 import { DailyForecast } from './components/DailyForecast/DailyForecast';
+import s from './App.module.css';
 import './style.css';
+import { useCurrentTimePeriod } from './hooks/useCurrentTimePeriod';
 
 type WeatherData = {
   current: CurrentForecastData,
@@ -24,17 +26,23 @@ export default function App() {
       // localStorage.setItem('forecast', JSON.stringify(data.hourly));
   }, []);
 
+  const timePeriod = useCurrentTimePeriod();
+
   if (!forecast || !currentLocation) {
-    return <div>Loading</div>
+    return <div className={s.app} data-period={timePeriod}><div>Loading</div></div>
   }
 
   const {current, daily, hourly} = forecast
 
+  console.log(timePeriod)
+
   return (
-    <div>
-      <CurrentConditions forecast={current} locationData={currentLocation}/>
-      <HourlyForecast forecast={hourly} />
-      <DailyForecast forecast={daily} currentTemp={current.temp} />
+    <div className={s.app} data-period={timePeriod}>
+      <div className={s.container}>
+        <CurrentConditions forecast={current} locationData={currentLocation}/>
+        <HourlyForecast forecast={hourly} />
+        <DailyForecast forecast={daily} currentTemp={current.temp} />
+      </div>
     </div>
   );
 }
