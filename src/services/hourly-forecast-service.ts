@@ -1,21 +1,36 @@
 import { fetchHourlyForecast } from '../api/weather-api';
+import { DataStatuses } from '../models/data-statuses';
 import { HourlyForecastData } from '../models/forecast';
+import { DataWithStatus } from '../types/data-wrappets';
 
-export async function getHourlyForecastData(locationKey: string): Promise<HourlyForecastData[]> {
+export async function getHourlyForecastData(locationKey: string): Promise<DataWithStatus<HourlyForecastData[]>> {
     const cacheData = getCacheData(locationKey)
 
     if (cacheData?.length && cacheData[0].datetime > new Date()) {
-        return cacheData
+        return {
+            status: DataStatuses.FROM_CACHE,
+            data: cacheData
+        }
     }
 
     try {
     const data = await fetchHourlyForecast(locationKey);
-    //TODO: add catch
-
     saveDataToCache(locationKey, data)
-    return data
+    return {
+        status: DataStatuses.FETCHED,
+        data
+    }
 } catch {
-    return cacheData as HourlyForecastData[]
+    if (cacheData) {
+        return {
+            status: DataStatuses.CACHE_FALLBACK,
+            data: cacheData
+        }
+    }
+
+    return {
+        status: DataStatuses.EMPTY_FALLBACK
+    }
 }
 }
 

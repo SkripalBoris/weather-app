@@ -1,8 +1,9 @@
 import { fetchDailyForecast } from '../api/weather-api';
+import { DataStatuses } from '../models/data-statuses';
 import { DailyForecastData } from '../models/forecast';
+import { DataWithStatus } from '../types/data-wrappets';
 
-
-export async function getDailyForecastData(locationKey: string): Promise<DailyForecastData[]> {
+export async function getDailyForecastData(locationKey: string): Promise<DataWithStatus<DailyForecastData[]>> {
     const cacheData = getCacheData(locationKey)
 
     if (cacheData?.length) {
@@ -12,18 +13,31 @@ export async function getDailyForecastData(locationKey: string): Promise<DailyFo
         targetTime.setHours(0,0,0,0)
 
         if (firstPreparedData.getTime() === targetTime.getTime()) {
-            return cacheData
+            return {
+                status: DataStatuses.FROM_CACHE,
+                data: cacheData
+            }
         }
     }
 
     try {
         const data = await fetchDailyForecast(locationKey);
-        //TODO: add catch
-    
         saveDataToCache(locationKey, data)
-        return data
+        return {
+            status: DataStatuses.FETCHED,
+            data
+        }
     } catch {
-        return cacheData as DailyForecastData[]
+        if (cacheData) {
+            return {
+                status: DataStatuses.CACHE_FALLBACK,
+                data: cacheData
+            }
+        }
+
+        return {
+            status: DataStatuses.EMPTY_FALLBACK
+        }
     }
     
 }

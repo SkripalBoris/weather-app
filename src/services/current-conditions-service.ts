@@ -1,8 +1,9 @@
 import { fetchCurrentConditions } from '../api/weather-api';
+import { DataStatuses } from '../models/data-statuses';
 import { CurrentConditionsData } from '../models/forecast';
+import { DataWithStatus } from '../types/data-wrappets';
 
-
-export async function getCurrentConditionsData(locationKey: string): Promise<CurrentConditionsData> {
+export async function getCurrentConditionsData(locationKey: string): Promise<DataWithStatus<CurrentConditionsData>> {
     const cacheData = getCacheData(locationKey);
 
     if (cacheData) {
@@ -11,18 +12,33 @@ export async function getCurrentConditionsData(locationKey: string): Promise<Cur
         const diffMilliseconds = currentTime.getTime() - cacheDatetime.getTime()
 
         // 10 minutes in milliseconds
-        if (diffMilliseconds < 100 * 60 * 1000 && currentTime.getHours() === cacheDatetime.getHours()) {
-            return cacheData
+        if (diffMilliseconds < 10 * 60 * 1000 && currentTime.getHours() === cacheDatetime.getHours()) {
+            return {
+                status: DataStatuses.FROM_CACHE,
+                data: cacheData
+            }
         }
     }
 
     try {
-        //TODO: add catch
         const data = await fetchCurrentConditions(locationKey);
         saveDataToCache(locationKey, data)
-        return data
+        return {
+            status: DataStatuses.FETCHED,
+            data
+        }
     } catch {
-        return cacheData as CurrentConditionsData
+
+        if (cacheData) {
+            return {
+                status: DataStatuses.CACHE_FALLBACK,
+                data: cacheData
+            }
+        }
+
+        return {
+            status: DataStatuses.EMPTY_FALLBACK
+        }
     }
 
 }

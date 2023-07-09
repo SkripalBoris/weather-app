@@ -15,7 +15,7 @@
 
   .icon {
     width: 60px;
-    height: auto;
+    height: 60px;
   }
 
 .hourly,
@@ -26,10 +26,10 @@
 }
 
 .hourly {
-    height: 163px;
+    height: 100px;
 }
 
 .daily {
-    height: 400px;
+    height: 200px;
     margin-top: 10px;
 }
