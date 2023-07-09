@@ -23,12 +23,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font: rgb(121, 119, 119);
+  color: rgb(121, 119, 119);
   border-radius: 50%;
   background-color: rgb(255 255 255 / 3%);
   border: 1px solid rgb(255 255 255 / 3%);
   cursor: pointer;
-  user-select: none;
+  font-size: 1.4rem;
 }
 
 .scrollControlLeft {

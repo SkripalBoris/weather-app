@@ -83,20 +83,20 @@ export const HourlyForecast: FC<HourlyForecastProps> = ({
         ))}
       </div>
       {areScrollControlsVisible.left && (
-        <div
+        <button
           className={classNames(s.scrollControl, s.scrollControlLeft)}
           onClick={onLeftClick}
         >
           {'<'}
-        </div>
+        </button>
       )}
       {areScrollControlsVisible.right && (
-        <div
+        <button
           className={classNames(s.scrollControl, s.scrollControlRight)}
           onClick={onRightClick}
         >
           {'>'}
-        </div>
+        </button>
       )}
     </div>
   );
