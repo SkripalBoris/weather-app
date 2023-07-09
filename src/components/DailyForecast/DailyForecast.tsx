@@ -4,6 +4,7 @@ import { DailyRange } from './DailyRange/DailyRange'
 import { WeatherConditionIcon } from '../WeatherConditionIcon/WeatherConditionIcon'
 import { WeatherConditions } from '../../models/weather-conditions'
 import classNames from 'classnames'
+import { ReactComponent as CalendarSvg } from '../../icons/calendar.svg'
 import s from './DailyForecast.module.css'
 
 type DailyForecast = {
@@ -26,7 +27,10 @@ export const DailyForecast: FC<DailyForecast> = ({ forecast, currentTemp, classN
   ], [forecast])
 
   return <div className={classNames(s.daily, className)}>
-    <div className={s.dailyTitle}>10-DAY FORECAST</div>
+    <div className={s.dailyTitle}>
+      <CalendarSvg className={s.titleIcon} />
+      {forecast.length}-DAY FORECAST
+    </div>
     <div className={s.forecast}>
       {forecast.map(
         ({

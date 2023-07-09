@@ -1,10 +1,11 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { CurrentConditionsData, HourlyForecastData } from '../../models/forecast'
 import classNames from 'classnames'
-import s from './HourlyForecast.module.css'
 import { checkLeftScroll, checkRightScroll } from './utils/check-scrolls'
 import { DESKTOP_MIN_WIDTH_PX } from '../../constants/media'
 import { HourlyForecastItem } from './HourlyForecastItem/HourlyForecastItem'
+import { ReactComponent as CalendarSvg } from '../../icons/calendar.svg'
+import s from './HourlyForecast.module.css'
 
 type HourlyForecastProps = {
     className?: string
@@ -46,7 +47,10 @@ export const HourlyForecast: FC<HourlyForecastProps> = ({ current, forecast, cla
     }, [])
 
     return <div className={classNames(s.forecast, className)}>
-        <div className={s.title}>HOURLY FORECAST</div>
+        <div className={s.title}>
+            <CalendarSvg className={s.titleIcon}/>
+            HOURLY FORECAST
+        </div>
         <div className={s.forecastList} ref={listRef}>
             <HourlyForecastItem title='Now' condition={current.condition} temperature={current.temperature} />
             {forecast.map(({ datetime, temperature, conditions }) => (

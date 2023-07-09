@@ -10,6 +10,11 @@
 
 .forecastItemTitle {
     white-space: nowrap;
+    font-size: 1.7rem;
+}
+
+.forecastTemperature {
+    font-size: 2rem;
 }
   
 .forecastIcon {

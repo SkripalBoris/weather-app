@@ -8,9 +8,9 @@
 }
 
 .temp {
-  font-size: 102px;
-  line-height: 102px;
-  font-weight: 100;
+  font-size: 10.2rem;
+  line-height: 0.9;
+  font-weight: 200;
 }
 
 .temp::after {
@@ -18,6 +18,12 @@
   position: absolute;
 }
 
-.conditions {
-  font-size: 24px;
+.weatherName {
+  font-size: 2.4rem;
+  line-height: 1.2;
+}
+
+.weatherRange {
+  font-size: 2.1rem;
+  line-height: 1.2;
 }

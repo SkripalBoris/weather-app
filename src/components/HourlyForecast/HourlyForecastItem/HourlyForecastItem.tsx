@@ -13,6 +13,6 @@ export const HourlyForecastItem: FC<HourlyForecastItemProps> = ({ title, tempera
     <div className={s.forecastItem}>
         <span className={s.forecastItemTitle}>{title}</span>
         <WeatherConditionIcon condition={condition} allowNight size='m' className={s.forecastIcon} />
-        <span>{temperature}°</span>
+        <span className={s.forecastTemperature}>{temperature}°</span>
     </div>
 )

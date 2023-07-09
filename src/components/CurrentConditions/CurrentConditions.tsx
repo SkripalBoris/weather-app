@@ -23,10 +23,7 @@ export const CurrentConditions: FC<CurrentConditionsProps> = ({
     return <div className={classNames(s.root, className)}>
         <div className={s.location}>{locationData.name}</div>
         <div className={s.temp}>{forecast.temperature}</div>
-        <div className={s.conditions}>
-            {weatherName}
-            <br />
-            H:{temperatureRange.max}° L:{temperatureRange.min}°
-        </div>
+        <div className={s.weatherName}>{weatherName}</div>
+        <div className={s.weatherRange}>H:{temperatureRange.max}°&ensp;L:{temperatureRange.min}°</div>
     </div>
 }
