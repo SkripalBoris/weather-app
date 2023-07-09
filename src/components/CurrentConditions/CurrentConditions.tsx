@@ -1,17 +1,19 @@
 import React, { FC, useMemo } from 'react'
 import { LocationData } from '../../models/location'
-import { CurrentForecastData } from '../../models/forecast'
+import { CurrentConditionsData, TemperatureRange } from '../../models/forecast'
 import { getWeatherConditionName } from './utils/getWeatherConditionName'
 import s from './CurrentConditions.module.css'
 
 type CurrentConditionsProps = {
     locationData: LocationData
-    forecast: CurrentForecastData
+    forecast: CurrentConditionsData
+    temperatureRange: TemperatureRange
 }
 
 export const CurrentConditions: FC<CurrentConditionsProps> = ({
     locationData,
-    forecast
+    forecast,
+    temperatureRange
 }) => {
     const weatherName = useMemo(() => getWeatherConditionName(forecast.condition), [forecast.condition])
 
@@ -21,7 +23,7 @@ export const CurrentConditions: FC<CurrentConditionsProps> = ({
         <div className={s.conditions}>
             {weatherName}
             <br />
-            H:{forecast.temperatureRange.max} L:{forecast.temperatureRange.min}
+            H:{temperatureRange.max} L:{temperatureRange.min}
         </div>
     </div>
 }

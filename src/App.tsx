@@ -22,8 +22,8 @@ export default function App() {
   return (
     <div className={s.app} data-period={timePeriod}>
       <div className={s.container}>
-        <CurrentConditions forecast={current} locationData={currentLocation}/>
-        <HourlyForecast forecast={hourly} />
+        <CurrentConditions forecast={current} locationData={currentLocation} temperatureRange={daily[0].temperatureRange}/>
+        <HourlyForecast current={current} forecast={hourly} />
         <DailyForecast forecast={daily} currentTemp={current.temperature} />
       </div>
     </div>

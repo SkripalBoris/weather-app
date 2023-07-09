@@ -5,9 +5,9 @@ export type TemperatureRange = {
     max: number
 }
 
-export type CurrentForecastData = {
+export type CurrentConditionsData = {
+    datetime: Date,
     temperature: number,
-    temperatureRange: TemperatureRange,
     condition: WeatherConditions
 }
 
