@@ -4,22 +4,22 @@
     justify-content: center;
     align-items: center;
     color: white;
+}
 
-    &[data-period="morning"] {
-        background: linear-gradient(to bottom, #81C5E5, #DC927F);
-    }
+.app[data-period="morning"] {
+    background: linear-gradient(to bottom, #81C5E5, #DC927F);
+}
 
-    &[data-period="day"] {
-        background: linear-gradient(to bottom, #4982AD, rgb(144 187 216 / 50%));
-    }
+.app[data-period="day"] {
+    background: linear-gradient(to bottom, #4982AD, rgb(144 187 216 / 50%));
+}
 
-    &[data-period="evening"] {
-        background: linear-gradient(to bottom, #6F6D8C, rgb(188 97 90 / 50%));
-    }
+.app[data-period="evening"] {
+    background: linear-gradient(to bottom, #6F6D8C, rgb(188 97 90 / 50%));
+}
 
-    &[data-period="night"] {
-        background: linear-gradient(to bottom, #011e33, #625a72);
-    }
+.app[data-period="night"] {
+    background: linear-gradient(to bottom, #011e33, #625a72);
 }
 
 .container {

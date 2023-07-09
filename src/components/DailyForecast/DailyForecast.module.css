@@ -22,11 +22,13 @@
     align-items: center;
     border-bottom: 1px solid rgb(255 255 255 / 25%);
     box-sizing: border-box;
+}
 
-    &:nth-last-child(-n+3) { 
-        border-bottom: none;
-        padding-bottom: 0;
-    }
+.datetimeContainer:nth-last-child(-n+3),
+.conditionsContainer:nth-last-child(-n+3),
+.dailyRangeContainer:nth-last-child(-n+3) {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .datetimeContainer {

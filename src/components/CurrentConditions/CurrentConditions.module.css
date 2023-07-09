@@ -12,7 +12,11 @@
     font-size: 102px;
     line-height: 102px;
     font-weight: 100;
-    transform: translateX(1.6rem);
+  }
+
+  .temp::after {
+    content: '°';
+    position: absolute;
   }
 
   .conditions {
