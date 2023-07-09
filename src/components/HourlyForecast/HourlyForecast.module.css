@@ -3,6 +3,7 @@
     background-color: rgb(255 255 255 / 3%);
     border: 1px solid rgb(255 255 255 / 3%);
     padding: 15px;
+    position: relative;
 }
   
 .title {
@@ -19,32 +20,33 @@
     overflow-x: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    margin: 0 -15px;
+}
+
+.scrollControl {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 47%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: rgb(121, 119, 119);
+    border-radius: 50%;
+    background-color: rgb(255 255 255 / 3%);
+    border: 1px solid rgb(255 255 255 / 3%);
+    cursor: pointer;
+    user-select: none;
+}
+
+.scrollControlLeft {
+    left: -50px;
+}
+
+.scrollControlRight {
+    right: -50px;
 }
 
 .forecastList::-webkit-scrollbar {
     display: none;
   }
-  
-.forecastItem {
-    width: 45px;
-    min-width: 45px;
-    text-align: center;
-    margin: 0 10px;
-    padding: 10px 0 0;
-}
-  
-.forecastItem:first-child {
-    margin-left: 0;
-}
-  
-.forecastItem:last-child {
-    margin-right: 0;
-}
-  
-.forecastItem span {
-    display: block;
-}
-  
-.forecastIcon {
-    margin: 15px 0
-}

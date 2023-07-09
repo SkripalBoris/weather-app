@@ -1,0 +1,21 @@
+.forecastItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15px;
+    padding: 10px 0 0;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+
+.forecastItemTitle {
+    white-space: nowrap;
+}
+  
+.forecastItem span {
+    display: block;
+}
+  
+.forecastIcon {
+    margin: 15px 0
+}

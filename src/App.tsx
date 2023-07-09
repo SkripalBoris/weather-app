@@ -46,12 +46,10 @@ export default function App() {
     <div className={s.app} data-period={timePeriod}>
       {detailedStatus === 'cache-fallback' && <Notification status='warning'>Data can be outdated</Notification>}
       {detailedStatus === 'error' && <Notification status='error'>Cannot fetch data</Notification>}
-      <div className={s.container}>
         {!ready && <LoadingPage status={detailedStatus} />}
         {ready && !!forecastPreparedProps &&
           <ForecastPage {...forecastPreparedProps} />
         }
-      </div>
     </div>
   );
 }

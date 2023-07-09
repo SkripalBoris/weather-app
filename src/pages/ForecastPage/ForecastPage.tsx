@@ -4,6 +4,7 @@ import { DailyForecast } from '../../components/DailyForecast/DailyForecast'
 import { HourlyForecast } from '../../components/HourlyForecast/HourlyForecast'
 import { CurrentConditionsData, HourlyForecastData, DailyForecastData } from '../../models/forecast'
 import { LocationData } from '../../models/location'
+import s from './ForecastPage.module.css'
 
 type ForecastPageProps = {
     current: CurrentConditionsData,
@@ -13,9 +14,9 @@ type ForecastPageProps = {
 }
 
 export const ForecastPage: FC<ForecastPageProps> = ({current, hourly, daily, currentLocation }) => {
-    return <>
-    <CurrentConditions forecast={current} locationData={currentLocation} temperatureRange={daily[0].temperatureRange}/>
-        <HourlyForecast current={current} forecast={hourly} />
-        <DailyForecast forecast={daily} currentTemp={current.temperature} />
-        </>
+    return <div className={s.root}>
+        <CurrentConditions className={s.current} forecast={current} locationData={currentLocation} temperatureRange={daily[0].temperatureRange}/>
+        <HourlyForecast className={s.hourly} current={current} forecast={hourly} />
+        <DailyForecast className={s.daily} forecast={daily} currentTemp={current.temperature} />
+    </div>
 }

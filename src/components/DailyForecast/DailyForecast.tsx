@@ -4,19 +4,21 @@ import { DailyRange } from './DailyRange/DailyRange'
 import s from './DailyForecast.module.css'
 import { WeatherConditionIcon } from '../WeatherConditionIcon/WeatherConditionIcon'
 import { WeatherConditions } from '../../models/weather-conditions'
+import classNames from 'classnames'
 
 type DailyForecast = {
+  className?: string
   currentTemp: number
   forecast: DailyForecastData[]
 }
 
 const CONDITIONS_WITH_RAIN = new Set([WeatherConditions.HEAVY_RAIN, WeatherConditions.LIGHT_RAIN, WeatherConditions.THUNDER, WeatherConditions.RAIN])
 
-export const DailyForecast: FC<DailyForecast> = ({ forecast, currentTemp }) => {
+export const DailyForecast: FC<DailyForecast> = ({ forecast, currentTemp, className }) => {
   const lowest = Math.min(...forecast.map(data => data.temperatureRange.min))
   const highest = Math.max(...forecast.map(data => data.temperatureRange.max))
 
-  return <div className={s.daily}>
+  return <div className={classNames(s.daily, className)}>
     <div className={s.dailyTitle}>10-DAY FORECAST</div>
     <div className={s.forecast}>
       {forecast.map(

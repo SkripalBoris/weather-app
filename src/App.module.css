@@ -22,9 +22,3 @@
 .app[data-period="night"] {
     background: linear-gradient(to bottom, #011e33, #625a72);
 }
-
-.container {
-    min-width: 320px;
-    max-width: 460px;
-    padding: 10px;
-}
