@@ -1,8 +1,7 @@
 import React from 'react';
 import { useCurrentLocationData } from './hooks/useCurrentLocationData';
-import { CurrentConditions } from './components/CurrentConditions/CurrentConditions';
-import { HourlyForecast } from './components/HourlyForecast/HourlyForecast';
-import { DailyForecast } from './components/DailyForecast/DailyForecast';
+import { LoadingPage } from './pages/LoadingPage/LoadingPage';
+import { ForecastPage } from './pages/ForecastPage/ForecastPage';
 import { useCurrentTimePeriod } from './hooks/useCurrentTimePeriod';
 import { useForecastData } from './hooks/useForecastData';
 import s from './App.module.css';
@@ -13,18 +12,13 @@ export default function App() {
   const forecast = useForecastData(currentLocation?.code)
   const timePeriod = useCurrentTimePeriod();
 
-  if (!forecast || !currentLocation) {
-    return <div className={s.app} data-period={timePeriod}><div>Loading</div></div>
-  }
-
-  const {current, daily, hourly} = forecast
-
   return (
     <div className={s.app} data-period={timePeriod}>
       <div className={s.container}>
-        <CurrentConditions forecast={current} locationData={currentLocation} temperatureRange={daily[0].temperatureRange}/>
-        <HourlyForecast current={current} forecast={hourly} />
-        <DailyForecast forecast={daily} currentTemp={current.temperature} />
+        {(!currentLocation || !forecast) ?
+          <LoadingPage positionLoading={!currentLocation} />
+          : <ForecastPage currentLocation={currentLocation} {...forecast} />
+        }
       </div>
     </div>
   );
