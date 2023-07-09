@@ -1,30 +1,30 @@
 .app {
-    display: flex;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: start;
-    color: white;
-    grid-template-columns: auto;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: start;
+  color: white;
+  grid-template-columns: auto;
 }
 
 @media only screen and (min-width: 1025px) {
-    .app {
-        align-items: center;
-    }
-} 
-
-.app[data-period="morning"] {
-    background: linear-gradient(to bottom, #81C5E5, #DC927F);
+  .app {
+    align-items: center;
+  }
 }
 
-.app[data-period="day"] {
-    background: linear-gradient(to bottom, #4982AD, rgb(144 187 216 / 50%));
+.app[data-period='morning'] {
+  background: linear-gradient(to bottom, #81c5e5, #dc927f);
 }
 
-.app[data-period="evening"] {
-    background: linear-gradient(to bottom, #6F6D8C, rgb(188 97 90 / 50%));
+.app[data-period='day'] {
+  background: linear-gradient(to bottom, #4982ad, rgb(144 187 216 / 50%));
 }
 
-.app[data-period="night"] {
-    background: linear-gradient(to bottom, #011e33, #625a72);
+.app[data-period='evening'] {
+  background: linear-gradient(to bottom, #6f6d8c, rgb(188 97 90 / 50%));
+}
+
+.app[data-period='night'] {
+  background: linear-gradient(to bottom, #011e33, #625a72);
 }

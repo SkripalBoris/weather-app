@@ -1,44 +1,44 @@
 .forecast {
-    border-radius: 15px;
-    background-color: rgb(255 255 255 / 3%);
-    border: 1px solid rgb(255 255 255 / 3%);
-    padding: 15px;
-    position: relative;
+  border-radius: 15px;
+  background-color: rgb(255 255 255 / 3%);
+  border: 1px solid rgb(255 255 255 / 3%);
+  padding: 15px;
+  position: relative;
 }
 
 .forecastList {
-    display: flex;
-    overflow-y: hidden;
-    overflow-x: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    margin: 0 -15px;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin: 0 -15px;
 }
 
 .scrollControl {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    top: 47%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font: rgb(121, 119, 119);
-    border-radius: 50%;
-    background-color: rgb(255 255 255 / 3%);
-    border: 1px solid rgb(255 255 255 / 3%);
-    cursor: pointer;
-    user-select: none;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 47%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: rgb(121, 119, 119);
+  border-radius: 50%;
+  background-color: rgb(255 255 255 / 3%);
+  border: 1px solid rgb(255 255 255 / 3%);
+  cursor: pointer;
+  user-select: none;
 }
 
 .scrollControlLeft {
-    left: -50px;
+  left: -50px;
 }
 
 .scrollControlRight {
-    right: -50px;
+  right: -50px;
 }
 
 .forecastList::-webkit-scrollbar {
-    display: none;
+  display: none;
 }

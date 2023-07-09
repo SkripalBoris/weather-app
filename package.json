@@ -16,7 +16,8 @@
     "eslint:check": "eslint ./src",
     "eslint:fix": "eslint ./src --fix",
     "stylelint:check": "stylelint ./src/**.css",
-    "stylelint:fix": "stylelint ./src/**.css --fix"
+    "stylelint:fix": "stylelint ./src/**.css --fix",
+    "format": "prettier --write \"src/**/*.+(js|jsx|ts|tsx|css|scss)\""
   },
   "devDependencies": {
     "@types/react": "18.2.14",
@@ -25,6 +26,7 @@
     "@typescript-eslint/parser": "^5.61.0",
     "eslint": "^8.44.0",
     "eslint-plugin-react": "^7.32.2",
+    "prettier": "^3.0.0",
     "react-scripts": "latest",
     "stylelint": "^15.10.0",
     "stylelint-config-standard": "^34.0.0",
