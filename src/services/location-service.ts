@@ -9,14 +9,14 @@ type LocationInfo = {
 const LOCATIONS_INFO_CACHE_KEY = 'locationsInfoCache'
 
 export async function getLocationInfo(lat: number, lon: number): Promise<DataWithStatus<LocationInfo>> {
-  const cachedData = getDataFromCache(lat, lon)
+    const cachedData = getDataFromCache(lat, lon)
 
-  if (cachedData) {
-    return {
-        status: DataStatuses.FROM_CACHE,
-        data: cachedData
+    if (cachedData) {
+        return {
+            status: DataStatuses.FROM_CACHE,
+            data: cachedData
+        }
     }
-  }
 
     try {
         const locationData = await fetchLocationInfo(lat, lon)
@@ -49,5 +49,5 @@ function saveDataToCache(lat: number, lon: number, data: LocationInfo): void {
     const rawCacheData = localStorage.getItem(LOCATIONS_INFO_CACHE_KEY)
     const cacheData = rawCacheData ? JSON.parse(rawCacheData) : {}
 
-    localStorage.setItem(LOCATIONS_INFO_CACHE_KEY, JSON.stringify({...cacheData, [locationKey]: data}))
+    localStorage.setItem(LOCATIONS_INFO_CACHE_KEY, JSON.stringify({ ...cacheData, [locationKey]: data }))
 }

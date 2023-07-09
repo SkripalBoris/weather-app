@@ -6,7 +6,7 @@ type NotificationProps = {
     children: ReactNode
 }
 
-export const Notification: FC<NotificationProps> = ({status, children}) => {
+export const Notification: FC<NotificationProps> = ({ status, children }) => {
     return <div className={s.notification} data-status={status}>
         {children}
     </div>

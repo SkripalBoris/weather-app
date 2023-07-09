@@ -28,7 +28,6 @@ export async function getCurrentConditionsData(locationKey: string): Promise<Dat
             data
         }
     } catch {
-
         if (cacheData) {
             return {
                 status: DataStatuses.CACHE_FALLBACK,
@@ -40,11 +39,10 @@ export async function getCurrentConditionsData(locationKey: string): Promise<Dat
             status: DataStatuses.EMPTY_FALLBACK
         }
     }
-
 }
 
 // key - location
-type CurrentConditionsCacheType = Record<string, Omit<CurrentConditionsData, 'datetime'> & {datetime: string}>
+type CurrentConditionsCacheType = Record<string, Omit<CurrentConditionsData, 'datetime'> & { datetime: string }>
 const CURRENT_CONDITIONS_CACHE_KEY = 'currentConditionsCache'
 
 function getCacheData(locationKey: string): CurrentConditionsData | undefined {
@@ -69,7 +67,7 @@ function getCacheData(locationKey: string): CurrentConditionsData | undefined {
 function saveDataToCache(locationKey: string, data: CurrentConditionsData): void {
     const rawCacheData = localStorage.getItem(CURRENT_CONDITIONS_CACHE_KEY);
     const cacheData: CurrentConditionsCacheType = rawCacheData ? JSON.parse(rawCacheData) : {}
-    
-    localStorage.setItem(CURRENT_CONDITIONS_CACHE_KEY, JSON.stringify({...cacheData, [locationKey]: data}))
+
+    localStorage.setItem(CURRENT_CONDITIONS_CACHE_KEY, JSON.stringify({ ...cacheData, [locationKey]: data }))
 
 }

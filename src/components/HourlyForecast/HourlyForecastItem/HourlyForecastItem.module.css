@@ -12,10 +12,6 @@
     white-space: nowrap;
 }
   
-.forecastItem span {
-    display: block;
-}
-  
 .forecastIcon {
     margin: 15px 0
 }

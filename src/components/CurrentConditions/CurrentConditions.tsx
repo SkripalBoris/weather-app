@@ -20,7 +20,7 @@ export const CurrentConditions: FC<CurrentConditionsProps> = ({
 }) => {
     const weatherName = useMemo(() => getWeatherConditionName(forecast.condition), [forecast.condition])
 
-    return <div className={classNames(s.header, className)}>
+    return <div className={classNames(s.root, className)}>
         <div className={s.location}>{locationData.name}</div>
         <div className={s.temp}>{forecast.temperature}</div>
         <div className={s.conditions}>

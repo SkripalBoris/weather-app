@@ -9,10 +9,12 @@ type AccuWeatherLocationData = {
 const LOCATION_API_BASE_URL = 'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search'
 
 export async function fetchLocationInfo(lat: number, lon: number): Promise<{ name: string, code: string }> {
-    const data = await axios.get<AccuWeatherLocationData>(LOCATION_API_BASE_URL, {params: {
-        'apikey': ACCU_WEATHER_API_KEY,
-        'q': `${lat},${lon}`
-    }})
+    const data = await axios.get<AccuWeatherLocationData>(LOCATION_API_BASE_URL, {
+        params: {
+            'apikey': ACCU_WEATHER_API_KEY,
+            'q': `${lat},${lon}`
+        }
+    })
 
     return {
         name: data.data.EnglishName,

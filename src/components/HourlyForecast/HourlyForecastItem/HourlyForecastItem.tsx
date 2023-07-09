@@ -9,7 +9,7 @@ type HourlyForecastItemProps = {
     condition: WeatherConditions
 }
 
-export const HourlyForecastItem: FC<HourlyForecastItemProps> = ({title, temperature, condition}) => (
+export const HourlyForecastItem: FC<HourlyForecastItemProps> = ({ title, temperature, condition }) => (
     <div className={s.forecastItem}>
         <span className={s.forecastItemTitle}>{title}</span>
         <WeatherConditionIcon condition={condition} allowNight size='m' className={s.forecastIcon} />

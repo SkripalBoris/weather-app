@@ -13,9 +13,14 @@ type ForecastPageProps = {
     currentLocation: LocationData
 }
 
-export const ForecastPage: FC<ForecastPageProps> = ({current, hourly, daily, currentLocation }) => {
+export const ForecastPage: FC<ForecastPageProps> = ({ current, hourly, daily, currentLocation }) => {
     return <div className={s.root}>
-        <CurrentConditions className={s.current} forecast={current} locationData={currentLocation} temperatureRange={daily[0].temperatureRange}/>
+        <CurrentConditions
+            className={s.current}
+            forecast={current}
+            locationData={currentLocation}
+            temperatureRange={daily[0].temperatureRange}
+        />
         <HourlyForecast className={s.hourly} current={current} forecast={hourly} />
         <DailyForecast className={s.daily} forecast={daily} currentTemp={current.temperature} />
     </div>

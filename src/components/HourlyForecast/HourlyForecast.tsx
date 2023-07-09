@@ -15,7 +15,7 @@ type HourlyForecastProps = {
 const SCROLL_DELTA = 60;
 
 export const HourlyForecast: FC<HourlyForecastProps> = ({ current, forecast, className }) => {
-    const [areScrollControlsVisible, setAreScrollControlsVisible] = useState({left: false, right: false})
+    const [areScrollControlsVisible, setAreScrollControlsVisible] = useState({ left: false, right: false })
     const listRef = useRef<HTMLDivElement>(null);
 
     const updateScrollsViewIfNeeded = useCallback((offset: number) => {
@@ -31,24 +31,24 @@ export const HourlyForecast: FC<HourlyForecastProps> = ({ current, forecast, cla
         }
     }, [])
 
-     useEffect(() => {
+    useEffect(() => {
         updateScrollsViewIfNeeded(0)
     }, [])
 
     const onLeftClick = useCallback(() => {
-        listRef.current?.scrollTo({left: listRef.current.scrollLeft - SCROLL_DELTA, behavior: 'smooth'})
+        listRef.current?.scrollTo({ left: listRef.current.scrollLeft - SCROLL_DELTA, behavior: 'smooth' })
         updateScrollsViewIfNeeded(-SCROLL_DELTA)
     }, [])
 
     const onRightClick = useCallback(() => {
-        listRef.current?.scrollTo({left: listRef.current.scrollLeft + SCROLL_DELTA, behavior: 'smooth'})
+        listRef.current?.scrollTo({ left: listRef.current.scrollLeft + SCROLL_DELTA, behavior: 'smooth' })
         updateScrollsViewIfNeeded(SCROLL_DELTA)
     }, [])
 
     return <div className={classNames(s.forecast, className)}>
         <div className={s.title}>HOURLY FORECAST</div>
         <div className={s.forecastList} ref={listRef}>
-            <HourlyForecastItem title='Now' condition={current.condition} temperature={current.temperature}/>
+            <HourlyForecastItem title='Now' condition={current.condition} temperature={current.temperature} />
             {forecast.map(({ datetime, temperature, conditions }) => (
                 <HourlyForecastItem
                     key={datetime.getTime()}
@@ -58,7 +58,11 @@ export const HourlyForecast: FC<HourlyForecastProps> = ({ current, forecast, cla
                 />
             ))}
         </div>
-        {areScrollControlsVisible.left && <div className={classNames(s.scrollControl, s.scrollControlLeft)} onClick={onLeftClick}>{'<'}</div>}
-        {areScrollControlsVisible.right && <div className={classNames(s.scrollControl, s.scrollControlRight)} onClick={onRightClick}>{'>'}</div>}
+        {areScrollControlsVisible.left && (
+            <div className={classNames(s.scrollControl, s.scrollControlLeft)} onClick={onLeftClick}>{'<'}</div>
+        )}
+        {areScrollControlsVisible.right && (
+            <div className={classNames(s.scrollControl, s.scrollControlRight)} onClick={onRightClick}>{'>'}</div>
+        )}
     </div>
 }

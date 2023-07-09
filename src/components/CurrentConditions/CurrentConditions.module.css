@@ -1,7 +1,7 @@
-.header {
-    font-weight: 400;
-    text-align: center;
-  }
+.root {
+  font-weight: 400;
+  text-align: center;
+}
 
 .location {
   font-size: 3.7rem;

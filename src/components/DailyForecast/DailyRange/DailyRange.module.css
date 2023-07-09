@@ -16,8 +16,10 @@
     opacity: 0.5;
 }
   
-/* Shows the range of lowest and highest 
-     temperatures of the 10-day period */
+/*
+    Shows the range of lowest and highest 
+    temperatures of the 10-day period
+*/
 .range {
     flex: 1;
     background-color: rgb(0 0 0 / 15%);
@@ -26,9 +28,11 @@
     position: relative;
 }
       
-/* Shows the range of lowest and highest 
-         temperatures of each day in comparison 
-         to the range of the whole period */
+/*
+    Shows the range of lowest and highest 
+    temperatures of each day in comparison 
+    to the range of the whole period
+*/
 .rangeMeter {
     position: absolute;
     inset: 0 var(--right) 0 var(--left);

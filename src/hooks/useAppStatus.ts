@@ -10,7 +10,10 @@ type AppStatus = {
     detailedStatus: DetailedAppStatus
 }
 
-export function useAppStatus(locationData: LocationDataWithStatus | undefined, forecastData: ForecastData | undefined): AppStatus {
+export function useAppStatus(
+    locationData: LocationDataWithStatus | undefined,
+    forecastData: ForecastData | undefined
+): AppStatus {
     const generalDataStatus = useMemo<AppStatus>(() => {
         if (!locationData) {
             return {
@@ -26,7 +29,6 @@ export function useAppStatus(locationData: LocationDataWithStatus | undefined, f
             }
         }
 
-
         if (!forecastData) {
             return {
                 ready: false,
@@ -39,7 +41,7 @@ export function useAppStatus(locationData: LocationDataWithStatus | undefined, f
             forecastData.current,
             forecastData.hourly,
             forecastData.daily
-        ].map(({status}) => status))
+        ].map(({ status }) => status))
 
         if (worstStatus === DataStatuses.EMPTY_FALLBACK) {
             return {

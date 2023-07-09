@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { TimePeriod, getTimePeriod } from '../utils/getTimePeriod';
 
-
 export function useCurrentTimePeriod(): TimePeriod {
     const [timePeriod, setCurrentTimePeriod] = useState(getTimePeriod(new Date()));
 

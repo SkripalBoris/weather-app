@@ -34,9 +34,13 @@ export function useForecastData(locationKey: string | undefined): ForecastData |
     return forecastData
 }
 
-function prepareForecastData(currentConditions: DataWithStatus<CurrentConditionsData>, hourlyForecast: DataWithStatus<HourlyForecastData[]>, dailyForecast: DataWithStatus<DailyForecastData[]>): ForecastData {
+function prepareForecastData(
+    currentConditions: DataWithStatus<CurrentConditionsData>,
+    hourlyForecast: DataWithStatus<HourlyForecastData[]>,
+    dailyForecast: DataWithStatus<DailyForecastData[]>
+): ForecastData {
     const currentTime = new Date();
-    
+
     const preparedDaily = prepareDailyForecast(dailyForecast, currentTime);
     const preparedHourly = prepareHourlyForecast(hourlyForecast, currentTime);
     const preparedCurrent = preparedCurrentConditions(currentConditions, preparedHourly, preparedDaily, currentTime)
@@ -57,47 +61,58 @@ function prepareForecastData(currentConditions: DataWithStatus<CurrentConditions
     }
 }
 
-function prepareDailyForecast(dailyForecast: DataWithStatus<DailyForecastData[]>, currentTime: Date): DataWithStatus<DailyForecastData[]> {
+function prepareDailyForecast(
+    dailyForecast: DataWithStatus<DailyForecastData[]>,
+    currentTime: Date
+): DataWithStatus<DailyForecastData[]> {
     if (dailyForecast.status === DataStatuses.CACHE_FALLBACK) {
         const startTime = new Date(currentTime);
-        startTime.setHours(0,0,0,0);
+        startTime.setHours(0, 0, 0, 0);
 
         return {
             status: DataStatuses.CACHE_FALLBACK,
-            data: dailyForecast.data.filter(({datetime}) => datetime >= startTime)
+            data: dailyForecast.data.filter(({ datetime }) => datetime >= startTime)
         }
     }
 
     return dailyForecast
 }
 
-function prepareHourlyForecast(hourlyForecast: DataWithStatus<HourlyForecastData[]>, currentTime: Date): DataWithStatus<HourlyForecastData[]> {
+function prepareHourlyForecast(
+    hourlyForecast: DataWithStatus<HourlyForecastData[]>,
+    currentTime: Date
+): DataWithStatus<HourlyForecastData[]> {
     if (hourlyForecast.status === DataStatuses.CACHE_FALLBACK) {
         const startTime = new Date(currentTime);
-        startTime.setMinutes(0,0,0);
+        startTime.setMinutes(0, 0, 0);
 
         return {
             status: DataStatuses.CACHE_FALLBACK,
-            data: hourlyForecast.data.filter(({datetime}) => datetime >= startTime)
+            data: hourlyForecast.data.filter(({ datetime }) => datetime >= startTime)
         }
     }
 
     return hourlyForecast
 }
 
-function preparedCurrentConditions(currentConditions: DataWithStatus<CurrentConditionsData>, hourlyForecast: DataWithStatus<HourlyForecastData[]>, dailyForecast: DataWithStatus<DailyForecastData[]>, currentTime: Date): DataWithStatus<CurrentConditionsData> {
+function preparedCurrentConditions(
+    currentConditions: DataWithStatus<CurrentConditionsData>,
+    hourlyForecast: DataWithStatus<HourlyForecastData[]>,
+    dailyForecast: DataWithStatus<DailyForecastData[]>,
+    currentTime: Date
+): DataWithStatus<CurrentConditionsData> {
     if (currentConditions.status === DataStatuses.FETCHED || currentConditions.status === DataStatuses.FROM_CACHE) {
         return currentConditions
     }
 
     const startTime = new Date(currentTime);
-    startTime.setMinutes(0,0,0);
+    startTime.setMinutes(0, 0, 0);
 
     if (hourlyForecast.status !== DataStatuses.EMPTY_FALLBACK) {
         const startTime = new Date(currentTime);
-        startTime.setMinutes(0,0,0);
+        startTime.setMinutes(0, 0, 0);
 
-        const targetHourlyData = hourlyForecast.data.find(({datetime}) => {
+        const targetHourlyData = hourlyForecast.data.find(({ datetime }) => {
             return datetime.getTime() === startTime.getTime()
         })
 
@@ -115,9 +130,9 @@ function preparedCurrentConditions(currentConditions: DataWithStatus<CurrentCond
 
     if (dailyForecast.status !== DataStatuses.EMPTY_FALLBACK) {
         const startTime = new Date(currentTime);
-        startTime.setHours(0,0,0,0);
+        startTime.setHours(0, 0, 0, 0);
 
-        const targetHourlyData = dailyForecast.data.find(({datetime}) => {
+        const targetHourlyData = dailyForecast.data.find(({ datetime }) => {
             return datetime.getTime() === startTime.getTime()
         })
 
@@ -127,7 +142,9 @@ function preparedCurrentConditions(currentConditions: DataWithStatus<CurrentCond
             return {
                 status: DataStatuses.CACHE_FALLBACK,
                 data: {
-                    temperature: timePeriod ==='night' ? targetHourlyData.temperatureRange.min : targetHourlyData.temperatureRange.max,
+                    temperature: timePeriod === 'night'
+                        ? targetHourlyData.temperatureRange.min
+                        : targetHourlyData.temperatureRange.max,
                     condition: targetHourlyData.conditions,
                     datetime: targetHourlyData.datetime
                 }

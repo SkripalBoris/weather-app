@@ -1,13 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
-import {ReactComponent as PartlyCloudySvg} from '../../icons/partly-cloudy.svg'
-import {ReactComponent as GlobeSvg} from '../../icons/globe.svg'
+import { ReactComponent as PartlyCloudySvg } from '../../icons/partly-cloudy.svg'
+import { ReactComponent as GlobeSvg } from '../../icons/globe.svg'
 import s from './LoadingPage.module.css'
 
 type LoadingPageProps = {
     status: 'fetch-location' | 'fetch-forecast' | unknown
 }
 
-export const LoadingPage: FC<LoadingPageProps> = ({status}) => {
+export const LoadingPage: FC<LoadingPageProps> = ({ status }) => {
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export const LoadingPage: FC<LoadingPageProps> = ({status}) => {
             <div className={s.title}>Fetching</div>
             {status === 'fetch-forecast' ? <PartlyCloudySvg className={s.icon} /> : <GlobeSvg className={s.icon} />}
         </div>
-        
+
         <div className={s.hourly}></div>
         <div className={s.daily}></div>
     </>
