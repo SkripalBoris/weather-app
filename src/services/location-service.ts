@@ -7,7 +7,7 @@ type LocationInfo = {
   code: string;
 };
 
-const LOCATIONS_INFO_CACHE_KEY = 'locationsInfoCache';
+const WEEK_IN_MILLISECONDS = 7 * 24 * 60 * 60 * 1000;
 
 export async function getLocationInfo(
   lat: number,
@@ -16,10 +16,17 @@ export async function getLocationInfo(
   const cachedData = getDataFromCache(lat, lon);
 
   if (cachedData) {
-    return {
-      status: DataStatuses.FROM_CACHE,
-      data: cachedData,
-    };
+    const currentTime = new Date();
+
+    if (
+      currentTime.getTime() - cachedData.cachingTime.getTime() <
+      WEEK_IN_MILLISECONDS
+    ) {
+      return {
+        status: DataStatuses.FROM_CACHE,
+        data: cachedData.data,
+      };
+    }
   }
 
   try {
@@ -30,6 +37,13 @@ export async function getLocationInfo(
       data: locationData,
     };
   } catch {
+    if (cachedData) {
+      return {
+        data: cachedData.data,
+        status: DataStatuses.CACHE_FALLBACK,
+      };
+    }
+
     return {
       status: DataStatuses.EMPTY_FALLBACK,
     };
@@ -40,14 +54,38 @@ function generateCacheKey(lat: number, lon: number): string {
   return `${lat}_${lon}`;
 }
 
-function getDataFromCache(lat: number, lon: number): LocationInfo | undefined {
-  const locationFromCache =
-    localStorage.getItem(LOCATIONS_INFO_CACHE_KEY) || '{}';
-  const parsedLocation: Record<string, LocationInfo> =
-    JSON.parse(locationFromCache);
-  const locationKey = generateCacheKey(lat, lon);
+type LocationInfoCachedData = {
+  cachingTime: string;
+  data: LocationInfo;
+};
 
-  return parsedLocation[locationKey];
+type ForecastCacheType = Record<string, LocationInfoCachedData>;
+
+const LOCATIONS_INFO_CACHE_KEY = 'locationsDataCache';
+
+function getDataFromCache(
+  lat: number,
+  lon: number
+):
+  | {
+      data: LocationInfo;
+      cachingTime: Date;
+    }
+  | undefined {
+  const locationFromCache = localStorage.getItem(LOCATIONS_INFO_CACHE_KEY);
+
+  if (!locationFromCache) {
+    return undefined;
+  }
+
+  const parsedLocation: ForecastCacheType = JSON.parse(locationFromCache);
+  const locationKey = generateCacheKey(lat, lon);
+  const locationCachedData = parsedLocation[locationKey];
+
+  return {
+    cachingTime: new Date(locationCachedData.cachingTime),
+    data: locationCachedData.data,
+  };
 }
 
 function saveDataToCache(lat: number, lon: number, data: LocationInfo): void {
@@ -57,6 +95,12 @@ function saveDataToCache(lat: number, lon: number, data: LocationInfo): void {
 
   localStorage.setItem(
     LOCATIONS_INFO_CACHE_KEY,
-    JSON.stringify({ ...cacheData, [locationKey]: data })
+    JSON.stringify({
+      ...cacheData,
+      [locationKey]: {
+        data,
+        cachingTime: new Date(),
+      },
+    })
   );
 }
