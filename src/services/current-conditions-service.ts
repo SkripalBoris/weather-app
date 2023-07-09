@@ -11,16 +11,20 @@ export async function getCurrentConditionsData(locationKey: string): Promise<Cur
         const diffMilliseconds = currentTime.getTime() - cacheDatetime.getTime()
 
         // 10 minutes in milliseconds
-        if (diffMilliseconds < 10 * 60 * 1000) {
+        if (diffMilliseconds < 100 * 60 * 1000 && currentTime.getHours() === cacheDatetime.getHours()) {
             return cacheData
         }
     }
 
-    //TODO: add catch
-    const data = await fetchCurrentConditions(locationKey);
-    saveDataToCache(locationKey, data)
+    try {
+        //TODO: add catch
+        const data = await fetchCurrentConditions(locationKey);
+        saveDataToCache(locationKey, data)
+        return data
+    } catch {
+        return cacheData as CurrentConditionsData
+    }
 
-    return data
 }
 
 // key - location

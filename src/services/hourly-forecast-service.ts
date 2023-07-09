@@ -8,11 +8,15 @@ export async function getHourlyForecastData(locationKey: string): Promise<Hourly
         return cacheData
     }
 
+    try {
     const data = await fetchHourlyForecast(locationKey);
     //TODO: add catch
 
     saveDataToCache(locationKey, data)
     return data
+} catch {
+    return cacheData as HourlyForecastData[]
+}
 }
 
 // key - location

@@ -16,11 +16,16 @@ export async function getDailyForecastData(locationKey: string): Promise<DailyFo
         }
     }
 
-    const data = await fetchDailyForecast(locationKey);
-    //TODO: add catch
-
-    saveDataToCache(locationKey, data)
-    return data
+    try {
+        const data = await fetchDailyForecast(locationKey);
+        //TODO: add catch
+    
+        saveDataToCache(locationKey, data)
+        return data
+    } catch {
+        return cacheData as DailyForecastData[]
+    }
+    
 }
 
 // key - location
