@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { ReactComponent as PartlyCloudySvg } from '../../icons/partly-cloudy.svg';
 import { ReactComponent as GlobeSvg } from '../../icons/globe.svg';
+import { MainPageLayout } from '../../layouts/MainPageLayout';
 import s from './LoadingPage.module.css';
 
 type LoadingPageProps = {
@@ -24,18 +25,19 @@ export const LoadingPage: FC<LoadingPageProps> = ({ status }) => {
   }
 
   return (
-    <>
-      <div className={s.header}>
-        <div className={s.title}>Fetching</div>
-        {status === 'fetch-forecast' ? (
-          <PartlyCloudySvg className={s.icon} />
-        ) : (
-          <GlobeSvg className={s.icon} />
-        )}
-      </div>
-
-      <div className={s.hourly}></div>
-      <div className={s.daily}></div>
-    </>
+    <MainPageLayout
+      firstSection={
+        <div className={s.header}>
+          <div className={s.title}>Fetching</div>
+          {status === 'fetch-forecast' ? (
+            <PartlyCloudySvg className={s.icon} />
+          ) : (
+            <GlobeSvg className={s.icon} />
+          )}
+        </div>
+      }
+      secondSection={<div className={s.hourly} />}
+      thirdSection={<div className={s.daily} />}
+    />
   );
 };

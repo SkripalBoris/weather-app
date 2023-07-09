@@ -6,28 +6,28 @@
   display: grid;
 
   grid-template-areas:
-    'current'
-    'hourly'
-    'daily';
+    'first'
+    'second'
+    'third';
 }
 
-.current,
-.hourly,
-.daily {
+.first,
+.second,
+.third {
   min-width: 0;
 }
 
-.current {
-  grid-area: current;
+.first {
+  grid-area: first;
   margin: 14px 0 20px;
 }
 
-.hourly {
-  grid-area: hourly;
+.second {
+  grid-area: second;
 }
 
-.daily {
-  grid-area: daily;
+.third {
+  grid-area: third;
   margin-top: 8px;
 }
 
@@ -35,18 +35,18 @@
   .root {
     max-width: 840px;
     grid-template-areas:
-      'current hourly'
-      'current daily';
+      'first second'
+      'first third';
   }
 
-  .current {
+  .first {
     margin: 0 70px 0 0;
     max-width: 200px;
     justify-self: end;
   }
 
-  .hourly,
-  .daily {
+  .second,
+  .third {
     width: 400px;
   }
 }

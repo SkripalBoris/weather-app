@@ -8,7 +8,7 @@ import {
   DailyForecastData,
 } from '../../models/forecast';
 import { LocationData } from '../../models/location';
-import s from './ForecastPage.module.css';
+import { MainPageLayout } from '../../layouts/MainPageLayout';
 
 type ForecastPageProps = {
   current: CurrentConditionsData;
@@ -24,23 +24,18 @@ export const ForecastPage: FC<ForecastPageProps> = ({
   currentLocation,
 }) => {
   return (
-    <div className={s.root}>
-      <CurrentConditions
-        className={s.current}
-        forecast={current}
-        locationData={currentLocation}
-        temperatureRange={daily[0].temperatureRange}
-      />
-      <HourlyForecast
-        className={s.hourly}
-        current={current}
-        forecast={hourly}
-      />
-      <DailyForecast
-        className={s.daily}
-        forecast={daily}
-        currentTemp={current.temperature}
-      />
-    </div>
+    <MainPageLayout
+      firstSection={
+        <CurrentConditions
+          forecast={current}
+          locationData={currentLocation}
+          temperatureRange={daily[0].temperatureRange}
+        />
+      }
+      secondSection={<HourlyForecast current={current} forecast={hourly} />}
+      thirdSection={
+        <DailyForecast forecast={daily} currentTemp={current.temperature} />
+      }
+    />
   );
 };
