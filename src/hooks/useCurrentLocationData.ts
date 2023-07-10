@@ -3,13 +3,6 @@ import { LocationDataWithStatus } from '../models/location';
 import { getLocationInfo } from '../services/location-service';
 import { DataStatuses } from '../models/data-statuses';
 
-const FALLBACK_DATA = {
-  lat: 59,
-  lon: 17,
-  name: 'Stockholm',
-  code: '314785',
-};
-
 export function useCurrentLocationData(): LocationDataWithStatus | undefined {
   const [locationData, setLocationData] = useState<LocationDataWithStatus>();
 
@@ -30,8 +23,7 @@ export function useCurrentLocationData(): LocationDataWithStatus | undefined {
       },
       () => {
         setLocationData({
-          status: DataStatuses.CACHE_FALLBACK,
-          data: FALLBACK_DATA,
+          status: DataStatuses.EMPTY_FALLBACK,
         });
       }
     );

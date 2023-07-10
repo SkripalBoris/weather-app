@@ -9,6 +9,7 @@ All configs are standard because the project doesn't need to have some specific 
 I added only two additional dependencies:
 - axios - to make data fetching a little bit easier.
 - classnames - to add several classes to one element a little bit easier.
+- svgo - to optimize svg files.
 
 I chose these libs because there are popular, have good support and typings, and have a small size.
 
