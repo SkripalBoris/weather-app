@@ -1,0 +1,52 @@
+.daily {
+  border-radius: 15px;
+  background-color: rgb(255 255 255 / 3%);
+  border: 1px solid rgb(255 255 255 / 3%);
+  padding: 15px;
+}
+
+.forecast {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  font-size: 2rem;
+}
+
+.datetimeContainer,
+.conditionsContainer,
+.dailyRangeContainer {
+  padding: 6px;
+  height: 55px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgb(255 255 255 / 25%);
+  box-sizing: border-box;
+}
+
+.datetimeContainer:nth-last-child(-n + 3),
+.conditionsContainer:nth-last-child(-n + 3),
+.dailyRangeContainer:nth-last-child(-n + 3) {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.datetimeContainer {
+  padding-left: 0;
+}
+
+.dailyRangeContainer {
+  padding-right: 0;
+}
+
+.dailyConditions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.probability {
+  display: block;
+  font-size: 12px;
+  line-height: 0.8;
+  color: #81cffa;
+}

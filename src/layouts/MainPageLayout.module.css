@@ -1,0 +1,52 @@
+.root {
+  width: 100%;
+  min-width: 320px;
+  max-width: 460px;
+  padding: 20px;
+  display: grid;
+
+  grid-template-areas:
+    'first'
+    'second'
+    'third';
+}
+
+.first,
+.second,
+.third {
+  min-width: 0;
+}
+
+.first {
+  grid-area: first;
+  margin: 14px 0 20px;
+}
+
+.second {
+  grid-area: second;
+}
+
+.third {
+  grid-area: third;
+  margin-top: 8px;
+}
+
+@media only screen and (min-width: 1025px) {
+  .root {
+    max-width: 840px;
+    grid-template-areas:
+      'first second'
+      'first third';
+  }
+
+  .first {
+    margin: 0 70px 0 0;
+    max-width: 200px;
+    justify-self: end;
+  }
+
+  .second,
+  .third {
+    width: 400px;
+  }
+}

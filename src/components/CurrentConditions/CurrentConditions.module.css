@@ -1,0 +1,29 @@
+.root {
+  font-weight: 400;
+  text-align: center;
+}
+
+.location {
+  font-size: 3.7rem;
+}
+
+.temp {
+  font-size: 10.2rem;
+  line-height: 0.9;
+  font-weight: 200;
+}
+
+.temp::after {
+  content: '°';
+  position: absolute;
+}
+
+.weatherName {
+  font-size: 2.4rem;
+  line-height: 1.2;
+}
+
+.weatherRange {
+  font-size: 2.1rem;
+  line-height: 1.2;
+}

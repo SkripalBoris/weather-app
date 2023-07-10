@@ -1,0 +1,22 @@
+.forecastItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 15px;
+  padding: 10px 0 0;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+}
+
+.forecastItemTitle {
+  white-space: nowrap;
+  font-size: 1.7rem;
+}
+
+.forecastTemperature {
+  font-size: 2rem;
+}
+
+.forecastIcon {
+  margin: 15px 0;
+}
