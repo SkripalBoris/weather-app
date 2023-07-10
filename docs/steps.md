@@ -4,6 +4,10 @@ I added typescript because programming with types is more safe and clear (and al
 Also, I added stylelint, eslint, and prettier to make the code style consistent.
 All configs are standard because the project doesn't need to have some specific rules and standard configuration is enough.
 
+## Browser support
+
+I chose to support browser with more than 0.2% of usage, because it helps to support a huge number of browser versions on the one hand and on another hand, I can use a lot of modern technologies.
+
 ## Additional dependencies
 
 I added only two additional dependencies:
